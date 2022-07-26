@@ -1,14 +1,14 @@
-const createGrid = (length: number) => {
-  const arr = Array.from(Array(length).keys(), (num) => num + 1);
-  const twoDimentionalArr: [number, number][] = [];
+import { CellTypes } from '../entities';
+import { DEFAULT_STATE } from '../constants';
 
-  arr.forEach((element) => {
-    for (let i = 0; i < arr.length; i++) {
-      twoDimentionalArr.push([element, i + 1]);
-    }
-  });
+const createGrid = (length: number): CellTypes[][] => {
+  const grid: CellTypes[][] = [];
 
-  return twoDimentionalArr;
+  for (let i = 0; i < length; i++) {
+    grid.push(new Array(length).fill(DEFAULT_STATE));
+  }
+
+  return grid;
 };
 
 export { createGrid };
