@@ -1,10 +1,7 @@
 import React, { FC } from 'react';
 
+import { CellTypes } from '../../entities';
 import './Cell.css';
-
-interface CellTypes {
-  coords: { x: number; y: number };
-}
 
 const Cell: FC<CellTypes> = () => {
   return <span className="cell-wrapper"></span>;
