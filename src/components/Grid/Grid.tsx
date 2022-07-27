@@ -1,19 +1,22 @@
 import React, { FC } from 'react';
 
 import Cell from '../Cell';
-import { createGrid } from '../../utils';
+import { addMines, createGrid } from '../../utils';
 
 import './Grid.css';
 
 const Grid: FC = () => {
   const gridSize = 16;
-  const gridDimensions = createGrid(gridSize);
+  const totalMines = 40;
+
+  const grid = createGrid(gridSize);
+  const gridWithMines = addMines(totalMines, grid);
 
   return (
     <div className="grid-wrapper">
-      {gridDimensions.map((coord) => (
-        <Cell coords={{ x: coord[0], y: coord[1] }} />
-      ))}
+      {gridWithMines.map((row, xIdx) =>
+        row.map((cell, yIdx) => <Cell key={`${xIdx}-${yIdx}`} {...cell} />)
+      )}
     </div>
   );
 };
