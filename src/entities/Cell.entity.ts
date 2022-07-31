@@ -2,7 +2,7 @@ interface CellTypes {
   isFlagged: boolean;
   isMine: boolean;
   isOpen: boolean;
-  minesAround: number;
+  mineCount: number;
 }
 
 export type { CellTypes };
