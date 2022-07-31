@@ -1,5 +1,6 @@
 import { cloneDeep } from 'lodash';
 import { CellTypes } from '../entities';
+import { updateMineCount } from './index';
 
 const addMines = (amount: number, grid: CellTypes[][]): CellTypes[][] => {
   const gridSize = grid.length;
@@ -22,6 +23,8 @@ const addMines = (amount: number, grid: CellTypes[][]): CellTypes[][] => {
 
     if (!gridCopy[x][y].isMine) {
       gridCopy[x][y].isMine = true;
+      gridCopy[x][y].mineCount = 0;
+      updateMineCount(gridCopy, x, y);
       minesLeft = minesLeft - 1;
     }
   }

@@ -1,6 +1,5 @@
 import { CellTypes } from '../entities';
 import { DEFAULT_STATE } from '../constants';
-import { addMines } from './index';
 
 const createGrid = (size: number): CellTypes[][] => {
   const grid = Array.from({ length: size }, () =>
