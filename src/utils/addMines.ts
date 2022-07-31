@@ -1,10 +1,10 @@
 import { cloneDeep } from 'lodash';
-import { CellTypes } from '../entities';
+import { StateType } from '../entities';
 import { updateMineCount } from './index';
 
-const addMines = (amount: number, grid: CellTypes[][]): CellTypes[][] => {
+const addMines = (amount: number, grid: StateType[][]): StateType[][] => {
   const gridSize = grid.length;
-  const gridCopy: CellTypes[][] = cloneDeep(grid);
+  const gridCopy: StateType[][] = cloneDeep(grid);
 
   if (gridSize ** 2 <= amount) {
     return gridCopy.map((row) => {

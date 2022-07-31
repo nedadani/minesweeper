@@ -1,6 +1,6 @@
-import { CellTypes } from '../entities';
+import { StateType } from '../entities';
 
-const updateMineCount = (grid: CellTypes[][], x: number, y: number): CellTypes[][] => {
+const updateMineCount = (grid: StateType[][], x: number, y: number): StateType[][] => {
   const max = grid.length - 1;
   const queue = [
     [x - 1, y - 1],

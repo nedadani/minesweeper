@@ -1,6 +1,6 @@
-import { CellTypes } from '../entities';
+import { StateType } from '../entities';
 
-const DEFAULT_STATE: CellTypes = {
+const DEFAULT_STATE: StateType = {
   isFlagged: false,
   isMine: false,
   isOpen: false,

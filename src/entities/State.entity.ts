@@ -1,8 +1,8 @@
-interface CellTypes {
+interface StateType {
   isFlagged: boolean;
   isMine: boolean;
   isOpen: boolean;
   mineCount: number;
 }
 
-export type { CellTypes };
+export type { StateType };
