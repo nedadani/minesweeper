@@ -16,10 +16,11 @@ const updateMineCount = (grid: StateType[][], x: number, y: number): StateType[]
   while (queue.length > 0) {
     const cur = queue[0];
 
+    // out of bounds
     if (cur[0] > max || cur[1] > max || cur[0] < 0 || cur[1] < 0) {
       queue.shift();
     } else {
-      grid[cur[0]][cur[1]].mineCount = grid[cur[0]][cur[1]].mineCount + 1;
+      grid[cur[0]][cur[1]].mineCount += +1;
       queue.shift();
     }
   }
