@@ -1,3 +1,4 @@
 export * from './addMines';
-export * from './updateMineCount';
 export * from './createGrid';
+export * from './openCells';
+export * from './updateMineCount';
