@@ -1,4 +1,4 @@
-import React, { FC, useState, SyntheticEvent } from 'react';
+import React, { FC, useEffect, useState, SyntheticEvent } from 'react';
 import { cloneDeep } from 'lodash';
 
 import { StateType } from '../../entities';
@@ -8,13 +8,15 @@ import { createGrid, getCellPosition, openCells, revealMines } from '../../utils
 import './Grid.css';
 
 interface GridType {
-  gridSize?: number;
-  mineCount?: number;
+  gridSize: number;
+  mineCount: number;
 }
 
-const Grid: FC<GridType> = ({ gridSize = 16, mineCount = 40 }) => {
-  const [grid, updateGrid] = useState<StateType[][]>(createGrid(gridSize, mineCount));
+const Grid: FC<GridType> = ({ gridSize, mineCount }) => {
+  const [grid, updateGrid] = useState<StateType[][]>([]);
   const [gameOver, setGameOver] = useState(false);
+
+  useEffect(() => updateGrid(createGrid(gridSize, mineCount)), [gridSize, mineCount]);
 
   const handleClick = (e: SyntheticEvent) => {
     const { x, y } = getCellPosition(e);
