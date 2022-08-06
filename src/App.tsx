@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
-import Grid from './components/Grid';
 import { SMALL, MEDIUM } from './constants';
+import Grid from './components/Grid';
 
 import './App.css';
 

@@ -1,9 +1,9 @@
 import React, { FC, useEffect, useState, SyntheticEvent } from 'react';
 import { cloneDeep } from 'lodash';
 
+import { createGrid, getCellPosition, openCells, revealMines } from '../../utils';
 import { StateType } from '../../entities';
 import Cell from '../Cell';
-import { createGrid, getCellPosition, openCells, revealMines } from '../../utils';
 
 import './Grid.css';
 
