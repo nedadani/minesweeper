@@ -4,3 +4,4 @@ export * from './getCellPosition';
 export * from './getSurroundingCells';
 export * from './openCells';
 export * from './updateMineCount';
+export * from './revealMines';

@@ -3,7 +3,7 @@ import { cloneDeep } from 'lodash';
 
 import { StateType } from '../../entities';
 import Cell from '../Cell';
-import { createGrid, getCellPosition, openCells } from '../../utils';
+import { createGrid, getCellPosition, openCells, revealMines } from '../../utils';
 
 import './Grid.css';
 
@@ -33,7 +33,8 @@ const Grid: FC<GridType> = ({ gridSize = 16, mineCount = 40 }) => {
       }
 
       if (currentCell.isMine) {
-        console.log('gameOver');
+        const newGrid = revealMines(gridCopy);
+        updateGrid(newGrid);
         setGameOver(true);
       }
     }
