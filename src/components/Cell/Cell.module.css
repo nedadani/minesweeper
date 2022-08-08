@@ -1,0 +1,51 @@
+.cell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 1;
+}
+
+.cell[data-value='1'] {
+  color: var(--blue);
+}
+
+.cell[data-value='2'] {
+  color: var(--green);
+}
+
+.cell[data-value='3'] {
+  color: var(--red);
+}
+
+.cell[data-value='4'] {
+  color: var(--purple);
+}
+
+.cell[data-value='5'] {
+  color: var(--yellow);
+}
+
+.cell[data-value='6'],
+.cell[data-value='7'],
+.cell[data-value='8'] {
+  color: var(--orange);
+}
+
+@media (prefers-color-scheme: dark) {
+  .cell {
+    background-color: var(--dark-theme-300);
+    box-shadow: inset 8px 8px 3px -4px var(--dark-theme-200);
+    color: white;
+  }
+
+  .cell.isOpen {
+    background-color: var(--dark-theme-500);
+    box-shadow: none;
+  }
+
+  .cell[data-value='0'] {
+    color: var(--dark-theme-500);
+  }
+}

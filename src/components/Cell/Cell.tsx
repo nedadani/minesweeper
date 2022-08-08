@@ -1,7 +1,8 @@
-import React, { FC, SyntheticEvent, useState } from 'react';
+import React, { FC } from 'react';
+import clsx from 'clsx';
 
 import { StateType } from '../../entities';
-import './Cell.css';
+import styles from './Cell.module.css';
 
 interface CellType extends StateType {
   position: { x: number; y: number };
@@ -10,12 +11,22 @@ interface CellType extends StateType {
 const Cell: FC<CellType> = ({ position, mineCount, isFlagged, isMine, isOpen }) => {
   if (isOpen)
     return (
-      <span className="cell" data-x-position={position.x} data-y-position={position.y}>
+      <span
+        className={clsx(styles.cell, { [styles.isOpen]: isOpen })}
+        data-x-position={position.x}
+        data-y-position={position.y}
+        data-value={mineCount}
+      >
         {isMine ? 'x' : mineCount}
       </span>
     );
+
   return (
-    <span className="cell" data-x-position={position.x} data-y-position={position.y}>
+    <span
+      className={clsx(styles.cell, { [styles.isOpen]: isOpen })}
+      data-x-position={position.x}
+      data-y-position={position.y}
+    >
       {isFlagged ? '@' : ''}
     </span>
   );
