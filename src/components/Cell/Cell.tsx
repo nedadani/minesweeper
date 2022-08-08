@@ -17,7 +17,7 @@ const Cell: FC<CellType> = ({ position, mineCount, isFlagged, isMine, isOpen }) 
         data-y-position={position.y}
         data-value={mineCount}
       >
-        {isMine ? 'x' : mineCount}
+        {isMine ? '💣' : mineCount}
       </span>
     );
 
@@ -27,7 +27,7 @@ const Cell: FC<CellType> = ({ position, mineCount, isFlagged, isMine, isOpen }) 
       data-x-position={position.x}
       data-y-position={position.y}
     >
-      {isFlagged ? '@' : ''}
+      {isFlagged ? '🚩' : ''}
     </span>
   );
 };

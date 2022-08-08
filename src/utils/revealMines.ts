@@ -8,6 +8,7 @@ const revealMines = (grid: StateType[][]): StateType[][] => {
   gridCopy.map((row) =>
     row.map((cell) => {
       if (cell.isMine) {
+        cell.mineCount = 0;
         cell.isOpen = true;
       }
       return cell;
