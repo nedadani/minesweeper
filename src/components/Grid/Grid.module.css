@@ -1,0 +1,20 @@
+@value medium, large from '../../index.css';
+
+.mobileGrid {
+  display: grid;
+  grid-template-columns: repeat(10, minmax(30px, 40px));
+}
+
+.desktopGrid {
+  display: grid;
+  grid-template-columns: repeat(16, minmax(30px, 40px));
+}
+
+.wrapper {
+  gap: 5px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .wrapper {
+  }
+}

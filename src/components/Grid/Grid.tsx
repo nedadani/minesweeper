@@ -1,11 +1,13 @@
 import React, { FC, useEffect, useState, SyntheticEvent } from 'react';
-import { cloneDeep } from 'lodash';
+import { cloneDeep, isEqual } from 'lodash';
+import clsx from 'clsx';
 
 import { createGrid, getCellPosition, openCells, revealMines } from '../../utils';
+import { SMALL, MEDIUM } from '../../constants';
 import { StateType } from '../../entities';
 import Cell from '../Cell';
 
-import './Grid.css';
+import styles from './Grid.module.css';
 
 interface GridType {
   gridSize: number;
@@ -52,7 +54,14 @@ const Grid: FC<GridType> = ({ gridSize, mineCount }) => {
   };
 
   return (
-    <div className="grid-wrapper" onClick={handleClick} onContextMenu={handleContextMenuClick}>
+    <div
+      className={clsx(styles.wrapper, {
+        [styles.mobileGrid]: isEqual({ gridSize, mineCount }, SMALL),
+        [styles.desktopGrid]: isEqual({ gridSize, mineCount }, MEDIUM),
+      })}
+      onClick={handleClick}
+      onContextMenu={handleContextMenuClick}
+    >
       {grid.map((row, xIdx) =>
         row.map((cell, yIdx) => (
           <Cell key={`${xIdx}-${yIdx}`} position={{ x: xIdx, y: yIdx }} {...cell} />
