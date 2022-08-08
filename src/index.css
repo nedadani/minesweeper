@@ -1,13 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Monda:wght@700&display=swap');
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Monda', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+:root {
+  --dark-theme-500: #313131;
+  --dark-theme-300: #5d5d5d;
+  --dark-theme-200: #818181;
+
+  --light-theme-500: #fff;
+  --light-theme-300: #d0d0d0;
+  --light-theme-200: #e1e1e1;
+
+  --black: #000;
+  --white: #fff;
+  --blue: #476098;
+  --red: #ca4246;
+  --orange: #e16541;
+  --yellow: #f18f43;
+  --green: #8b9862;
+  --purple: #a7489b;
 }
+
+@value medium: min-width: 768px;
+@value large: min-width: 1024px;
+@value xLarge: min-width: 1200px;
