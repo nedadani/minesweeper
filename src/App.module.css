@@ -1,0 +1,15 @@
+.app {
+  text-align: center;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: var(--dark-theme-500);
+  }
+}
+
+/* @media (prefers-color-scheme: light) {
+  body {
+    background-color: var(--light-theme-500);
+  }
+} */

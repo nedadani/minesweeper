@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { SMALL, MEDIUM } from './constants';
 import Grid from './components/Grid';
 
-import './App.css';
+import styles from './App.module.css';
 
 const App = () => {
   const [options, setOptions] = useState({ gridSize: 16, mineCount: 40 });
@@ -20,7 +20,7 @@ const App = () => {
   };
 
   return (
-    <main className="App">
+    <main className={styles.app}>
       <section>
         <Grid {...options} />
       </section>
