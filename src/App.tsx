@@ -6,7 +6,7 @@ import Grid from './components/Grid';
 import styles from './App.module.css';
 
 const App = () => {
-  const [options, setOptions] = useState({ gridSize: 16, mineCount: 40 });
+  const [options, setOptions] = useState({ gridSize: 16, totalMines: 40 });
 
   useEffect(() => setGridSize, []);
 

@@ -11,15 +11,15 @@ import styles from './Grid.module.css';
 
 interface GridType {
   gridSize: number;
-  mineCount: number;
+  totalMines: number;
 }
 
-const Grid: FC<GridType> = ({ gridSize, mineCount }) => {
+const Grid: FC<GridType> = ({ gridSize, totalMines }) => {
   const [grid, updateGrid] = useState<StateType[][]>([]);
   const [gameOver, setGameOver] = useState(false);
   const [touchStart, setTouchStart] = useState<number | null>(null);
 
-  useEffect(() => updateGrid(createGrid(gridSize, mineCount)), [gridSize, mineCount]);
+  useEffect(() => updateGrid(createGrid(gridSize, totalMines)), [gridSize, totalMines]);
 
   const handleClick = (e: SyntheticEvent) => {
     const { x, y } = getCellPosition(e);
@@ -74,8 +74,8 @@ const Grid: FC<GridType> = ({ gridSize, mineCount }) => {
   return (
     <div
       className={clsx(styles.wrapper, {
-        [styles.mobileGrid]: isEqual({ gridSize, mineCount }, SMALL),
-        [styles.desktopGrid]: isEqual({ gridSize, mineCount }, MEDIUM),
+        [styles.mobileGrid]: isEqual({ gridSize, totalMines }, SMALL),
+        [styles.desktopGrid]: isEqual({ gridSize, totalMines }, MEDIUM),
       })}
       onClick={handleClick}
       onContextMenu={handleContextMenuClick}

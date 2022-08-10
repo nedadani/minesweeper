@@ -1,5 +1,5 @@
-const SMALL = { gridSize: 10, mineCount: 10 };
+const SMALL = { gridSize: 10, totalMines: 10 };
 
-const MEDIUM = { gridSize: 16, mineCount: 40 };
+const MEDIUM = { gridSize: 16, totalMines: 40 };
 
 export { SMALL, MEDIUM };
