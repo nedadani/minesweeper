@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState, SyntheticEvent } from 'react';
+import React, { FC, useEffect, useState, SyntheticEvent, TouchEvent } from 'react';
 import { cloneDeep, isEqual } from 'lodash';
 import clsx from 'clsx';
 
@@ -17,6 +17,7 @@ interface GridType {
 const Grid: FC<GridType> = ({ gridSize, mineCount }) => {
   const [grid, updateGrid] = useState<StateType[][]>([]);
   const [gameOver, setGameOver] = useState(false);
+  const [touchStart, setTouchStart] = useState<number | null>(null);
 
   useEffect(() => updateGrid(createGrid(gridSize, mineCount)), [gridSize, mineCount]);
 
@@ -53,6 +54,23 @@ const Grid: FC<GridType> = ({ gridSize, mineCount }) => {
     updateGrid(gridCopy);
   };
 
+  const handleTouch = (e: TouchEvent, event: 'start' | 'end') => {
+    if (event === 'start') {
+      setTouchStart(new Date().getTime());
+    }
+    if (event === 'end') {
+      const now = new Date().getTime();
+
+      if (touchStart && now - touchStart > 300) {
+        handleContextMenuClick(e);
+      } else {
+        handleClick(e);
+      }
+
+      setTouchStart(null);
+    }
+  };
+
   return (
     <div
       className={clsx(styles.wrapper, {
@@ -61,6 +79,8 @@ const Grid: FC<GridType> = ({ gridSize, mineCount }) => {
       })}
       onClick={handleClick}
       onContextMenu={handleContextMenuClick}
+      onTouchStart={(e) => handleTouch(e, 'start')}
+      onTouchEnd={(e) => handleTouch(e, 'end')}
     >
       {grid.map((row, xIdx) =>
         row.map((cell, yIdx) => (
