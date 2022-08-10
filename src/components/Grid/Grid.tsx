@@ -1,8 +1,8 @@
-import React, { FC, useEffect, useState, SyntheticEvent, TouchEvent } from 'react';
+import React, { FC, SetStateAction, useEffect, useState, SyntheticEvent, TouchEvent } from 'react';
 import { cloneDeep, isEqual } from 'lodash';
 import clsx from 'clsx';
 
-import { createGrid, getCellPosition, openCells, revealMines } from '../../utils';
+import { createGrid, getCellPosition, openCells, revealMines, countFlags } from '../../utils';
 import { SMALL, MEDIUM } from '../../constants';
 import { StateType } from '../../entities';
 import Cell from '../Cell';
@@ -12,9 +12,10 @@ import styles from './Grid.module.css';
 interface GridType {
   gridSize: number;
   totalMines: number;
+  updateFlagCount: (newCount: SetStateAction<number>) => void;
 }
 
-const Grid: FC<GridType> = ({ gridSize, totalMines }) => {
+const Grid: FC<GridType> = ({ gridSize, totalMines, updateFlagCount }) => {
   const [grid, updateGrid] = useState<StateType[][]>([]);
   const [gameOver, setGameOver] = useState(false);
   const [touchStart, setTouchStart] = useState<number | null>(null);
@@ -42,6 +43,8 @@ const Grid: FC<GridType> = ({ gridSize, totalMines }) => {
         updateGrid(newGrid);
         setGameOver(true);
       }
+
+      updateFlagCount(countFlags(gridCopy));
     }
   };
 
@@ -50,8 +53,11 @@ const Grid: FC<GridType> = ({ gridSize, totalMines }) => {
 
     const { x, y } = getCellPosition(e);
     const gridCopy = cloneDeep(grid);
+
     gridCopy[x][y].isFlagged = !gridCopy[x][y].isFlagged;
+
     updateGrid(gridCopy);
+    updateFlagCount((cur: number) => cur++);
   };
 
   const handleTouch = (e: TouchEvent, event: 'start' | 'end') => {

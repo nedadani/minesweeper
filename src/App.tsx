@@ -7,6 +7,7 @@ import styles from './App.module.css';
 
 const App = () => {
   const [options, setOptions] = useState({ gridSize: 16, totalMines: 40 });
+  const [flagCount, setFlagCount] = useState(0);
 
   useEffect(() => setGridSize, []);
 
@@ -22,7 +23,7 @@ const App = () => {
   return (
     <main className={styles.app}>
       <section>
-        <Grid {...options} />
+        <Grid {...options} updateFlagCount={setFlagCount} />
       </section>
     </main>
   );
