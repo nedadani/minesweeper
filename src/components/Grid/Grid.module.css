@@ -1,17 +1,18 @@
-@value medium, large from '../../index.css';
-
 .mobileGrid {
   display: grid;
-  grid-template-columns: repeat(10, minmax(30px, 40px));
+  grid-template-columns: repeat(10, minmax(20px, 35px));
 }
 
 .desktopGrid {
   display: grid;
-  grid-template-columns: repeat(16, minmax(30px, 40px));
+  grid-template-columns: repeat(16, minmax(30px, 35px));
 }
 
 .wrapper {
-  gap: 5px;
+  gap: 4px;
+  margin: auto;
+  width: fit-content;
+  padding: 0 24px;
 
   /* removing default behaviour on touch devices */
   -webkit-tap-highlight-color: transparent;
