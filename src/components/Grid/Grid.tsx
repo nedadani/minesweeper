@@ -12,12 +12,13 @@ import styles from './Grid.module.css';
 interface GridType {
   gridSize: number;
   totalMines: number;
+  isGameOver: boolean;
+  setGameOver: (isGameOver: boolean) => void;
   updateFlagCount: (newCount: SetStateAction<number>) => void;
 }
 
-const Grid: FC<GridType> = ({ gridSize, totalMines, updateFlagCount }) => {
+const Grid: FC<GridType> = ({ gridSize, totalMines, isGameOver, setGameOver, updateFlagCount }) => {
   const [grid, updateGrid] = useState<StateType[][]>([]);
-  const [gameOver, setGameOver] = useState(false);
   const [touchStart, setTouchStart] = useState<number | null>(null);
 
   useEffect(() => updateGrid(createGrid(gridSize, totalMines)), [gridSize, totalMines]);
@@ -27,7 +28,7 @@ const Grid: FC<GridType> = ({ gridSize, totalMines, updateFlagCount }) => {
     const gridCopy = cloneDeep(grid);
     const currentCell = gridCopy[x][y];
 
-    if (!gameOver) {
+    if (!isGameOver) {
       if (currentCell.mineCount === 0 && !currentCell.isMine) {
         const newGrid = openCells(gridCopy, x, y);
         updateGrid(newGrid);
@@ -57,7 +58,7 @@ const Grid: FC<GridType> = ({ gridSize, totalMines, updateFlagCount }) => {
     gridCopy[x][y].isFlagged = !gridCopy[x][y].isFlagged;
 
     updateGrid(gridCopy);
-    updateFlagCount((cur: number) => cur++);
+    updateFlagCount(countFlags(gridCopy));
   };
 
   const handleTouch = (e: TouchEvent, event: 'start' | 'end') => {
