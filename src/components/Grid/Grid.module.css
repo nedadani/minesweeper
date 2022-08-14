@@ -12,7 +12,7 @@
   gap: 4px;
   margin: auto;
   width: fit-content;
-  padding: 0 24px;
+  padding: 0 32px;
 
   /* removing default behaviour on touch devices */
   -webkit-tap-highlight-color: transparent;

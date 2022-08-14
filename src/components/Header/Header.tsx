@@ -19,8 +19,8 @@ const Header: FC<HeaderType> = ({ flagCount, mineCount, isGameOver = false }) =>
       <span className={styles.catmoji}>{isGameOver ? '😿' : '😺'}</span>
 
       <div className={styles.counter}>
-        <span>{flagCount}</span>
         <span>🚩</span>
+        <span>{flagCount}</span>
       </div>
     </div>
   );
