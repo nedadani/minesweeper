@@ -5,16 +5,17 @@ import { StateType } from '../../entities';
 import styles from './Cell.module.css';
 
 interface CellType extends StateType {
-  position: { x: number; y: number };
+  x: number;
+  y: number;
 }
 
-const Cell: FC<CellType> = ({ position, mineCount, isFlagged, isMine, isOpen }) => {
+const Cell: FC<CellType> = React.memo(({ x, y, mineCount, isFlagged, isMine, isOpen }) => {
   if (isOpen)
     return (
       <span
         className={clsx(styles.cell, { [styles.isOpen]: isOpen })}
-        data-x-position={position.x}
-        data-y-position={position.y}
+        data-x-position={x}
+        data-y-position={y}
         data-value={mineCount}
       >
         {isMine ? '💣' : mineCount}
@@ -24,12 +25,12 @@ const Cell: FC<CellType> = ({ position, mineCount, isFlagged, isMine, isOpen }) 
   return (
     <span
       className={clsx(styles.cell, { [styles.isOpen]: isOpen })}
-      data-x-position={position.x}
-      data-y-position={position.y}
+      data-x-position={x}
+      data-y-position={y}
     >
       {isFlagged ? '🚩' : ''}
     </span>
   );
-};
+});
 
 export default Cell;
