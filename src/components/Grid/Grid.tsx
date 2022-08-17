@@ -1,51 +1,48 @@
-import React, { FC, SetStateAction, useEffect, useState, SyntheticEvent, TouchEvent } from 'react';
+import React, { FC, useState, SyntheticEvent, TouchEvent } from 'react';
 import { cloneDeep, isEqual } from 'lodash';
+import { useAtomValue, useAtom } from 'jotai';
+import { useUpdateAtom } from 'jotai/utils';
 import clsx from 'clsx';
 
-import { createGrid, getCellPosition, openCells, revealMines, countFlags } from '../../utils';
+import { flagCountAtom, gridAtom, gridOptionsAtom, isGameOverAtom } from '../../atoms';
+import { getCellPosition, openCells, revealMines, countFlags } from '../../utils';
 import { SMALL, MEDIUM } from '../../constants';
-import { StateType } from '../../entities';
 import Cell from '../Cell';
 
 import styles from './Grid.module.css';
 
-interface GridType {
-  gridSize: number;
-  totalMines: number;
-  isGameOver: boolean;
-  setGameOver: (isGameOver: boolean) => void;
-  updateFlagCount: (newCount: SetStateAction<number>) => void;
-}
-
-const Grid: FC<GridType> = ({ gridSize, totalMines, isGameOver, setGameOver, updateFlagCount }) => {
-  const [grid, updateGrid] = useState<StateType[][]>([]);
+const Grid: FC = () => {
   const [touchStart, setTouchStart] = useState<number | null>(null);
-
-  useEffect(() => updateGrid(createGrid(gridSize, totalMines)), [gridSize, totalMines]);
+  const [isGameOver, setGameOver] = useAtom(isGameOverAtom);
+  const [grid, updateGrid] = useAtom(gridAtom);
+  const gridOptions = useAtomValue(gridOptionsAtom);
+  const updateFlagCount = useUpdateAtom(flagCountAtom);
 
   const handleClick = (e: SyntheticEvent) => {
     const { x, y } = getCellPosition(e);
-    const gridCopy = cloneDeep(grid);
-    const currentCell = gridCopy[x][y];
+    const currentCell = grid[x][y];
 
     if (!isGameOver) {
       if (currentCell.mineCount === 0 && !currentCell.isMine) {
-        const newGrid = openCells(gridCopy, x, y);
+        const newGrid = openCells(grid, x, y);
         updateGrid(newGrid);
       }
 
       if (currentCell.mineCount > 0 && !currentCell.isMine) {
-        currentCell.isOpen = true;
-        updateGrid(gridCopy);
+        updateGrid((cur) => {
+          const newState = [...cur];
+          newState[x][y].isOpen = true;
+          return newState;
+        });
       }
 
       if (currentCell.isMine) {
-        const newGrid = revealMines(gridCopy);
+        const newGrid = revealMines(grid);
         updateGrid(newGrid);
         setGameOver(true);
       }
 
-      updateFlagCount(countFlags(gridCopy));
+      updateFlagCount(countFlags(grid));
     }
   };
 
@@ -81,8 +78,8 @@ const Grid: FC<GridType> = ({ gridSize, totalMines, isGameOver, setGameOver, upd
   return (
     <div
       className={clsx(styles.wrapper, {
-        [styles.mobileGrid]: isEqual({ gridSize, totalMines }, SMALL),
-        [styles.desktopGrid]: isEqual({ gridSize, totalMines }, MEDIUM),
+        [styles.mobileGrid]: isEqual(gridOptions, SMALL),
+        [styles.desktopGrid]: isEqual(gridOptions, MEDIUM),
       })}
       onClick={handleClick}
       onContextMenu={handleContextMenuClick}
@@ -90,9 +87,7 @@ const Grid: FC<GridType> = ({ gridSize, totalMines, isGameOver, setGameOver, upd
       onTouchEnd={(e) => handleTouch(e, 'end')}
     >
       {grid.map((row, xIdx) =>
-        row.map((cell, yIdx) => (
-          <Cell key={`${xIdx}-${yIdx}`} position={{ x: xIdx, y: yIdx }} {...cell} />
-        ))
+        row.map((cell, yIdx) => <Cell key={`${xIdx}-${yIdx}`} x={xIdx} y={yIdx} {...cell} />)
       )}
     </div>
   );
