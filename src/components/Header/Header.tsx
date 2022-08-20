@@ -1,18 +1,18 @@
 import React, { FC } from 'react';
+import { useAtomValue } from 'jotai';
 
+import { flagCountAtom, gridOptionsAtom, isGameOverAtom } from '../../atoms';
 import styles from './Header.module.css';
 
-interface HeaderType {
-  flagCount: number;
-  mineCount: number;
-  isGameOver?: boolean;
-}
+const Header: FC = () => {
+  const gridOptions = useAtomValue(gridOptionsAtom);
+  const flagCount = useAtomValue(flagCountAtom);
+  const isGameOver = useAtomValue(isGameOverAtom);
 
-const Header: FC<HeaderType> = ({ flagCount, mineCount, isGameOver = false }) => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.counter}>
-        <span>{mineCount}</span>
+        <span>{gridOptions.totalMines}</span>
         <span>💣</span>
       </div>
 

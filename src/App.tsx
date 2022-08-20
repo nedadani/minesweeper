@@ -3,6 +3,7 @@ import { useUpdateAtom, useResetAtom } from 'jotai/utils';
 
 import { gridOptionsAtom, gridAtom } from './atoms';
 import { SMALL, MEDIUM } from './constants';
+import Header from './components/Header';
 import Grid from './components/Grid';
 
 import styles from './App.module.css';
@@ -24,7 +25,7 @@ const App = () => {
   return (
     <main className={styles.app}>
       <section>
-        {/* <Header isGameOver={gameOver} flagCount={flagCount} mineCount={options.totalMines} /> */}
+        <Header />
         {/* <Toolkit /> */}
         <Grid />
       </section>
