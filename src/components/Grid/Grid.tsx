@@ -19,6 +19,8 @@ const Grid: FC = () => {
   const updateFlagCount = useUpdateAtom(flagCountAtom);
 
   const handleClick = (e: SyntheticEvent) => {
+    if ((e.target as HTMLSpanElement).attributes.length < 2) return;
+
     const { x, y } = getCellPosition(e);
     const currentCell = grid[x][y];
 
