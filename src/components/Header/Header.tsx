@@ -1,13 +1,20 @@
 import React, { FC } from 'react';
-import { useAtomValue } from 'jotai';
+import { useAtomValue, useAtom } from 'jotai';
+import { useResetAtom } from 'jotai/utils';
 
-import { flagCountAtom, gridOptionsAtom, isGameOverAtom } from '../../atoms';
+import { flagCountAtom, gridOptionsAtom, isGameOverAtom, gridAtom } from '../../atoms';
 import styles from './Header.module.css';
 
 const Header: FC = () => {
+  const [isGameOver, setGameOver] = useAtom(isGameOverAtom);
   const gridOptions = useAtomValue(gridOptionsAtom);
   const flagCount = useAtomValue(flagCountAtom);
-  const isGameOver = useAtomValue(isGameOverAtom);
+  const resetGrid = useResetAtom(gridAtom);
+
+  const handleClick = () => {
+    resetGrid();
+    setGameOver(false);
+  };
 
   return (
     <div className={styles.wrapper}>
@@ -16,7 +23,9 @@ const Header: FC = () => {
         <span>💣</span>
       </div>
 
-      <span className={styles.catmoji}>{isGameOver ? '😿' : '😺'}</span>
+      <button onClick={handleClick} className={styles.catmoji}>
+        {isGameOver ? '😿' : '😺'}
+      </button>
 
       <div className={styles.counter}>
         <span>🚩</span>
