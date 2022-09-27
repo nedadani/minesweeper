@@ -26,7 +26,6 @@ const App = () => {
     <main className={styles.app}>
       <section>
         <Header />
-        {/* <Toolkit /> */}
         <Grid />
       </section>
     </main>
