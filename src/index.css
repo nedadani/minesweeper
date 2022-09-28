@@ -13,9 +13,9 @@ body {
   --dark-theme-300: #5d5d5d;
   --dark-theme-200: #818181;
 
-  --light-theme-500: #fff;
   --light-theme-300: #d0d0d0;
   --light-theme-200: #e1e1e1;
+  --light-theme-100: #fff;
 
   --black: #000;
   --white: #fff;

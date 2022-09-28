@@ -34,3 +34,9 @@
     color: var(--white);
   }
 }
+
+@media (prefers-color-scheme: light) {
+  .wrapper {
+    color: var(--black);
+  }
+}

@@ -52,7 +52,6 @@
   .cell {
     background-color: var(--dark-theme-300);
     box-shadow: inset 8px 8px 3px -4px var(--dark-theme-200);
-    color: white;
   }
 
   .cell.isOpen {
@@ -62,5 +61,21 @@
 
   .cell[data-value='0'] {
     color: var(--dark-theme-500);
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  .cell {
+    background-color: var(--light-theme-300);
+    box-shadow: inset 8px 8px 3px -4px var(--light-theme-200);
+  }
+
+  .cell.isOpen {
+    background-color: var(--light-theme-100);
+    box-shadow: none;
+  }
+
+  .cell[data-value='0'] {
+    color: var(--light-theme-100);
   }
 }
