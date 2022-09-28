@@ -19,8 +19,16 @@
 }
 
 .catmoji {
+  --border-styles: 2px solid;
+
   background-color: transparent;
   font-size: 32px;
+  padding: 4px 8px;
+
+  border-top: var(--border-styles) var(--dark-theme-200);
+  border-left: var(--border-styles) var(--dark-theme-200);
+  border-right: var(--border-styles) var(--black);
+  border-bottom: var(--border-styles) var(--black);
 }
 
 @media (medium) {
@@ -33,10 +41,28 @@
   .wrapper {
     color: var(--white);
   }
+
+  .catmoji {
+    --border-styles: 2px solid;
+
+    border-top: var(--border-styles) var(--dark-theme-200);
+    border-left: var(--border-styles) var(--dark-theme-200);
+    border-right: var(--border-styles) var(--black);
+    border-bottom: var(--border-styles) var(--black);
+  }
 }
 
 @media (prefers-color-scheme: light) {
   .wrapper {
     color: var(--black);
+  }
+
+  .catmoji {
+    --border-styles: 2px solid;
+
+    border-top: var(--border-styles) var(--light-theme-200);
+    border-left: var(--border-styles) var(--light-theme-200);
+    border-right: var(--border-styles) var(--dark-theme-200);
+    border-bottom: var(--border-styles) var(--dark-theme-200);
   }
 }
