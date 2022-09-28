@@ -23,8 +23,3 @@
   -ms-user-select: none;
   user-select: none;
 }
-
-@media (prefers-color-scheme: dark) {
-  .wrapper {
-  }
-}

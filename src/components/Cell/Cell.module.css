@@ -7,6 +7,14 @@
 
   aspect-ratio: 1;
   cursor: pointer;
+
+  background-color: var(--dark-theme-300);
+  box-shadow: inset 8px 8px 3px -4px var(--dark-theme-200);
+  color: white;
+}
+
+.cell[data-value='0'] {
+  color: var(--dark-theme-500);
 }
 
 .cell[data-value='1'] {
@@ -33,6 +41,11 @@
 .cell[data-value='7'],
 .cell[data-value='8'] {
   color: var(--orange);
+}
+
+.cell.isOpen {
+  background-color: var(--dark-theme-500);
+  box-shadow: none;
 }
 
 @media (prefers-color-scheme: dark) {
