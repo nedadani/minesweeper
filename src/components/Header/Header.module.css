@@ -24,6 +24,7 @@
   background-color: transparent;
   font-size: 32px;
   padding: 4px 8px;
+  cursor: pointer;
 
   border-top: var(--border-styles) var(--dark-theme-200);
   border-left: var(--border-styles) var(--dark-theme-200);
